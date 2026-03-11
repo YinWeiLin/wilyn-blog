@@ -60,11 +60,12 @@ jobs:
                   username: ${{ secrets.SERVER_USER }}
                   password: ${{ secrets.SERVER_PASSWORD }}
                   port: ${{ secrets.SERVER_PORT }}
+                  script_stop: true
                   script: |
-                      export PATH=$PATH:/usr/local/bin:$HOME/.local/share/pnpm
+                      #!/bin/bash -l
                       cd /var/www/wilyn-blog
                       tar -xzf /tmp/deploy.tar.gz
                       rm /tmp/deploy.tar.gz
-                      $(which pnpm) install --prod --frozen-lockfile --ignore-scripts
-                      $(which pm2) restart wilyn-blog || $(which pm2) start npm --name "wilyn-blog" -- start
-                      $(which pm2) save
+                      pnpm install --prod --frozen-lockfile --ignore-scripts
+                      pm2 restart wilyn-blog || pm2 start npm --name "wilyn-blog" -- start
+                      pm2 save
