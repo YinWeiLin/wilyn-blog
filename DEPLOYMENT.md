@@ -1,6 +1,6 @@
 # 部署指南
 
-本项目使用 GitHub Actions 自动部署到云服务器。
+本项目使用 GitHub Actions 自动部署到云服务器。**构建在 GitHub 上完成**，服务器只需要运行构建好的代码，避免服务器资源不足。
 
 ## 一、服务器初始化（首次部署必做）
 
@@ -18,8 +18,6 @@ ssh your_username@your_server_ip
 # 下载脚本（从 GitHub）
 wget https://raw.githubusercontent.com/YOUR_USERNAME/wilyn-blog/main/scripts/setup-server.sh
 
-# 或者手动创建脚本文件，复制内容
-
 # 给脚本添加执行权限
 chmod +x setup-server.sh
 
@@ -29,14 +27,11 @@ chmod +x setup-server.sh
 
 脚本会自动完成以下操作：
 - ✅ 更新系统包
-- ✅ 安装 Git
-- ✅ 安装 pnpm
-- ✅ 安装 PM2（进程管理器）
+- ✅ 安装 Git、pnpm、PM2
 - ✅ 配置 PM2 开机自启
 - ✅ 创建项目目录
 - ✅ 克隆 GitHub 仓库
-- ✅ 安装依赖并构建项目
-- ✅ 启动应用
+- ✅ 安装生产依赖（不构建）
 
 ### 3. 配置 PM2 开机自启
 
@@ -78,22 +73,58 @@ GitHub Actions 会自动：
 1. ✅ 检出代码
 2. ✅ 安装依赖
 3. ✅ 运行 ESLint 检查
-4. ✅ 构建项目
-5. ✅ SSH 连接服务器并部署
-6. ✅ 重启应用
+4. ✅ **在 GitHub 上构建项目**（不占用服务器资源）
+5. ✅ 打包构建产物
+6. ✅ 传输到服务器
+7. ✅ 解压并重启应用
 
 你可以在 GitHub 仓库的 **Actions** 标签页查看部署进度和日志。
 
 ## 四、手动部署（备用方案）
 
-如果 GitHub Actions 出现问题，可以 SSH 到服务器手动部署：
+如果 GitHub Actions 出现问题，可以在本地构建后手动传输：
+
+### 方法 A：本地构建后 SCP 传输
 
 ```bash
-# 进入项目目录
+# 在本地项目目录
+pnpm build
+
+# 打包构建产物
+tar -czf deploy.tar.gz .next public package.json pnpm-lock.yaml next.config.ts app
+
+# 传输到服务器
+scp deploy.tar.gz your_user@your_server_ip:/tmp/
+
+# SSH 到服务器
+ssh your_user@your_server_ip
+
+# 解压并重启
+cd /var/www/wilyn-blog
+tar -xzf /tmp/deploy.tar.gz
+rm /tmp/deploy.tar.gz
+pnpm install --prod --frozen-lockfile
+pm2 restart wilyn-blog
+```
+
+### 方法 B：在服务器上手动拉取并构建
+
+```bash
+# SSH 到服务器
 cd /var/www/wilyn-blog
 
-# 运行部署脚本
-./scripts/deploy.sh
+# 拉取最新代码
+git pull origin main
+
+# 安装依赖
+pnpm install --frozen-lockfile
+
+# 构建（注意：会占用服务器资源）
+pnpm build
+
+# 重启
+pm2 restart wilyn-blog || pm2 start npm --name "wilyn-blog" -- start
+pm2 save
 ```
 
 ## 五、常用命令
@@ -118,6 +149,10 @@ pm2 stop wilyn-blog
 
 # 删除应用
 pm2 delete wilyn-blog
+
+# 查看服务器资源使用
+free -h
+top
 ```
 
 ## 六、配置域名（可选）
@@ -177,37 +212,113 @@ sudo certbot --nginx -d your_domain.com -d www.your_domain.com
 # 查看错误日志
 pm2 logs wilyn-blog --err
 
-# 尝试手动启动
-cd /var/www/wilyn-blog
-pnpm start
-```
-
-### 端口被占用
-
-```bash
-# 查看 3000 端口占用
+# 检查端口占用
 sudo lsof -i :3000
 
-# 杀死进程
-sudo kill -9 <PID>
+# 手动测试启动
+cd /var/www/wilyn-blog
+pnpm start
 ```
 
 ### GitHub Actions 部署失败
 
 1. 检查 Secrets 是否配置正确
 2. 查看 Actions 日志中的错误信息
-3. SSH 到服务器手动部署测试
+3. 确认服务器 SSH 可以正常连接
+4. 检查服务器磁盘空间：`df -h`
 
-## 八、更新 Node.js 版本（如需要）
+### 服务器资源不足
 
 ```bash
-# 使用 nvm 安装最新版本
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.0/install.sh | bash
-source ~/.bashrc
-nvm install 20
-nvm use 20
-nvm alias default 20
+# 查看内存使用
+free -h
+
+# 查看磁盘使用
+df -h
+
+# 清理不必要的文件
+sudo apt autoremove -y
+sudo apt autoclean
 ```
+
+### 构建产物传输失败
+
+检查服务器 `/tmp` 目录权限：
+```bash
+ls -la /tmp
+chmod 1777 /tmp
+```
+
+## 八、优化建议
+
+### 1. 使用 SSH 密钥代替密码
+
+更安全，且避免密码泄露：
+
+```bash
+# 本地生成密钥
+ssh-keygen -t rsa -b 4096
+
+# 复制公钥到服务器
+ssh-copy-id your_user@your_server_ip
+
+# 在 GitHub Secrets 中使用 SERVER_KEY 替代 SERVER_PASSWORD
+```
+
+### 2. 配置防火墙
+
+```bash
+# 安装 ufw
+sudo apt install ufw -y
+
+# 允许 SSH
+sudo ufw allow 22/tcp
+
+# 允许 HTTP/HTTPS
+sudo ufw allow 80/tcp
+sudo ufw allow 443/tcp
+
+# 启用防火墙
+sudo ufw enable
+```
+
+### 3. 定期备份
+
+```bash
+# 创建备份脚本
+cat > /root/backup.sh << 'EOF'
+#!/bin/bash
+tar -czf /root/wilyn-blog-$(date +%Y%m%d).tar.gz /var/www/wilyn-blog
+EOF
+
+chmod +x /root/backup.sh
+
+# 添加定时任务（每周备份）
+crontab -e
+# 添加: 0 2 * * 0 /root/backup.sh
+```
+
+---
+
+## 架构说明
+
+```
+本地开发
+    ↓ git push
+GitHub 仓库
+    ↓ 触发 GitHub Actions
+GitHub Actions（构建）
+    ↓ 传输构建产物
+云服务器（运行）
+    ↓ PM2 管理
+用户访问
+```
+
+**优势**：
+- ✅ 服务器不需要构建，节省资源
+- ✅ 构建失败不影响服务器稳定性
+- ✅ GitHub Actions 提供免费的构建资源
+- ✅ 部署速度更快
 
 ---
 
@@ -220,7 +331,7 @@ wilyn-blog/
 │       └── deploy.yml          # GitHub Actions 工作流
 ├── scripts/
 │   ├── setup-server.sh         # 服务器初始化脚本
-│   └── deploy.sh               # 手动部署脚本
+│   └── deploy.sh               # 手动部署脚本（备用）
 ├── app/                        # Next.js 应用代码
 └── DEPLOYMENT.md               # 本文档
 ```
@@ -228,6 +339,7 @@ wilyn-blog/
 ## 需要帮助？
 
 如果遇到问题，请检查：
-1. 服务器防火墙是否开放了 3000 端口
-2. PM2 进程是否正常运行
-3. GitHub Actions 日志中的错误信息
+1. GitHub Actions 日志
+2. PM2 应用日志：`pm2 logs wilyn-blog`
+3. 服务器资源使用：`free -h` 和 `df -h`
+4. 防火墙配置：`sudo ufw status`
