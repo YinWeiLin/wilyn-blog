@@ -60,12 +60,10 @@ jobs:
                   username: ${{ secrets.SERVER_USER }}
                   password: ${{ secrets.SERVER_PASSWORD }}
                   port: ${{ secrets.SERVER_PORT }}
-                  script_stop: true
                   script: |
-                      #!/bin/bash -l
                       cd /var/www/wilyn-blog
                       tar -xzf /tmp/deploy.tar.gz
                       rm /tmp/deploy.tar.gz
-                      pnpm install --prod --frozen-lockfile --ignore-scripts
-                      pm2 restart wilyn-blog || pm2 start npm --name "wilyn-blog" -- start
-                      pm2 save
+                      /home/admin/.nvm/versions/node/v24.14.0/bin/pnpm install --prod --frozen-lockfile --ignore-scripts
+                      /home/admin/.nvm/versions/node/v24.14.0/bin/pm2 restart wilyn-blog || /home/admin/.nvm/versions/node/v24.14.0/bin/pm2 start npm --name "wilyn-blog" -- start
+                      /home/admin/.nvm/versions/node/v24.14.0/bin/pm2 save
