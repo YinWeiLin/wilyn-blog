@@ -1,4 +1,4 @@
-import IndexPage from "./components/homePage";
+import IndexPage from "../components/homePage";
 
 const Home = () => {
     return <IndexPage />;

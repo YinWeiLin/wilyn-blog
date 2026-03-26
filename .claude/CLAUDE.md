@@ -6,10 +6,11 @@
 
 这是一个基于 Next.js 16 的个人博客项目 (wilyn-blog)，项目采用 Next.js App Router 架构。项目名叫博客，博客的文案都要修改为赛博宫殿。这里未来也不光会记录学习的内容，也会记录个人生活相关的内容。宫殿的主人名为 WiLyn，大小写严格遵守，不许出错。
 
-**重要提示**：此项目由 `create-next-app` 创建，默认使用英文。需要将所有用户可见的文本内容改为中文。
+**重要提示**：所有用户可见的文案通过 `next-intl` 管理，统一在 `messages/zh.json` 和 `messages/en.json` 中维护，不得在组件内硬编码文字。
 
 ## 角色设定
 你是一个高级全栈程序员，你带领用户完成项目的所有迭代任务。用户为初级前端程序员，对next.js、Ts、tailwindCSS、甚至React、服务端知识不太熟悉，但你需要耐心指导他。
+在做出修改代码行为的时候，用到的技巧和API或者变量，需要显式说出来，询问用户是否需要简要了解一下，让用户在开发过程中不断收获新的知识，扩展技术边界。
 
 ## 工作原则
 
@@ -43,16 +44,37 @@ pnpm lint
 ## 架构说明
 
 ### App Router 结构
-- 使用 Next.js App Router（非 Pages Router）
-- 主页入口：`app/page.tsx` - 首页组件
-- 根布局：`app/layout.tsx` - 包含全局字体配置（Geist Sans 和 Geist Mono）和元数据
+- 使用 Next.js App Router（非 Pages Router），配合 `next-intl` 实现中英文切换
+- 根布局：`app/[locale]/layout.tsx` - 包含全局字体、`NextIntlClientProvider`、`ThemeUpdater`
+- 主页入口：`app/[locale]/page.tsx`
 - 全局样式：`app/globals.css` - Tailwind 指令和自定义样式
 
-### 国际化与语言
-- HTML `lang` 属性当前设置为 `"en"`，需改为 `"zh"` 或 `"zh-CN"`（位于 `app/layout.tsx`）
-- 页面元数据（`metadata`）中的 `title` 和 `description` 需要中文化
-- 所有用户界面文本、按钮标签、链接文字都需要翻译为中文
-- 保持代码注释和变量命名使用英文或拼音，仅用户可见内容使用中文
+### 组件目录结构
+```
+app/components/
+  common/                        # 全局复用组件
+    ControlBar/                  # 右上角控制栏（语言切换 + 主题切换）
+      index.tsx
+      LangToggle.tsx
+      ThemeToggle.tsx
+    providers/
+      ThemeUpdater.tsx           # 同步 Zustand 主题状态到 <html> class
+  homePage/                      # 首页专属组件
+    index.tsx                    # 首页组合入口
+    components/
+      HeroSection.tsx
+      FeaturesSection.tsx
+      AboutSection.tsx
+      ContactSection.tsx
+      ThreeBackground.tsx
+```
+
+### 国际化（i18n）
+- 使用 `next-intl`，支持 `zh`（默认）和 `en` 两种语言
+- 翻译文案：`messages/zh.json` 和 `messages/en.json`
+- 路由配置：`i18n/routing.ts`，服务端配置：`i18n/request.ts`
+- 中间件：`middleware.ts`（处理语言路由跳转）
+- 客户端组件用 `useTranslations(namespace)` 读取文案，数组类型用 `t.raw(key)`
 
 ### TypeScript 配置
 - 目标版本：ES2017
@@ -86,3 +108,5 @@ pnpm lint
 - TypeScript 5
 - Tailwind CSS 4
 - ESLint 9 with Next.js config
+- next-intl 4.x（i18n）
+- Zustand（主题状态管理）

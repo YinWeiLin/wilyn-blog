@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import { ThemeUpdater } from "./components/common/hooks/ThemeUpdater";
+import "../globals.css";
+import { ThemeUpdater } from "../components/common/providers/ThemeUpdater";
+import { NextIntlClientProvider } from 'next-intl';
+import { getMessages } from 'next-intl/server';
 
 const geistSans = Geist({
     variable: "--font-geist-sans",
@@ -18,18 +20,25 @@ export const metadata: Metadata = {
     description: "The Resting Place of Souls",
 };
 
-export default function RootLayout({
+export default async function LocaleLayout({
     children,
+    params,
 }: Readonly<{
     children: React.ReactNode;
+    params: Promise<{ locale: string }>;
 }>) {
+    const { locale } = await params;
+    const messages = await getMessages();
+
     return (
-        <html lang="zh-CN">
+        <html lang={locale}>
             <body
                 className={`${geistSans.variable} ${geistMono.variable} antialiased`}
             >
-                <ThemeUpdater />
-                {children}
+                <NextIntlClientProvider messages={messages}>
+                    <ThemeUpdater />
+                    {children}
+                </NextIntlClientProvider>
             </body>
         </html>
     );

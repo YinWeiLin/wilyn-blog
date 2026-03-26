@@ -1,0 +1,46 @@
+{
+    "hero": {
+        "title": "欢迎来到 WiLyn 的赛博宫殿",
+        "subtitle": "记录技术探索，分享生活感悟",
+        "cta": "开始探索"
+    },
+    "about": {
+        "title": "关于本站",
+        "desc1": "这是一个基于 Next.js 构建的个人赛博空间，用于记录技术探索、编程思考、学习笔记和生活感悟。",
+        "desc2": "在这座赛博宫殿里，你可以找到关于 React、TypeScript、Next.js 等现代前端技术的分享，也能看到我的生活日常、思维碎片和个人成长轨迹。",
+        "desc3": "宫殿持续扩建中，敬请期待更多精彩内容..."
+    },
+    "features": {
+        "title": "宫殿特色",
+        "items": [
+            {
+                "title": "现代化架构",
+                "description": "使用 Next.js 16 App Router 架构，享受最新的 React 特性"
+            },
+            {
+                "title": "类型安全",
+                "description": "采用 TypeScript 开发，提供类型安全保障"
+            },
+            {
+                "title": "响应式设计",
+                "description": "使用 Tailwind CSS 构建响应式设计，支持暗色模式"
+            },
+            {
+                "title": "易于维护",
+                "description": "简洁清晰的代码结构，易于维护和扩展"
+            }
+        ]
+    },
+    "contact": {
+        "title": "联系我",
+        "subtitle": "如果你有任何问题或建议，欢迎与我交流",
+        "email": "发送邮件",
+        "copyright": "© 2026 WiLyn 赛博宫殿. All rights reserved."
+    },
+    "theme": {
+        "toggle": "切换主题"
+    },
+    "lang": {
+        "toggle": "EN"
+    }
+}

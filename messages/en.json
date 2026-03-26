@@ -1,0 +1,46 @@
+{
+    "hero": {
+        "title": "Welcome to WiLyn's Cyber Palace",
+        "subtitle": "Exploring technology, sharing life",
+        "cta": "Start Exploring"
+    },
+    "about": {
+        "title": "About",
+        "desc1": "A personal cyber space built with Next.js, documenting tech explorations, coding thoughts, learning notes, and life reflections.",
+        "desc2": "In this Cyber Palace, you'll find sharings on modern frontend technologies like React, TypeScript, and Next.js, alongside my daily life, scattered thoughts, and personal growth.",
+        "desc3": "The palace is under continuous construction, stay tuned for more..."
+    },
+    "features": {
+        "title": "Palace Features",
+        "items": [
+            {
+                "title": "Modern Architecture",
+                "description": "Built with Next.js 16 App Router, leveraging the latest React features"
+            },
+            {
+                "title": "Type Safe",
+                "description": "Developed with TypeScript for full type safety"
+            },
+            {
+                "title": "Responsive Design",
+                "description": "Built with Tailwind CSS, fully responsive with dark mode support"
+            },
+            {
+                "title": "Easy to Maintain",
+                "description": "Clean and clear code structure, easy to maintain and extend"
+            }
+        ]
+    },
+    "contact": {
+        "title": "Contact Me",
+        "subtitle": "Feel free to reach out if you have any questions or suggestions",
+        "email": "Send Email",
+        "copyright": "© 2026 WiLyn Cyber Palace. All rights reserved."
+    },
+    "theme": {
+        "toggle": "Toggle theme"
+    },
+    "lang": {
+        "toggle": "中文"
+    }
+}
