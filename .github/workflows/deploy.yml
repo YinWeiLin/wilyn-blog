@@ -36,12 +36,12 @@ jobs:
             - name: 打包构建产物
               run: |
                   tar -czf deploy.tar.gz \
-                    .next \
-                    public \
-                    package.json \
-                    pnpm-lock.yaml \
-                    next.config.ts \
-                    app
+                    --exclude='node_modules' \
+                    --exclude='.git' \
+                    --exclude='.claude' \
+                    --exclude='.github' \
+                    --exclude='deploy.tar.gz' \
+                    .
 
             - name: 传输文件到服务器
               uses: appleboy/scp-action@v0.1.7
