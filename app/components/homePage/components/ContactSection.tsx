@@ -1,9 +1,11 @@
 "use client";
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
+import Link from 'next/link';
 
 const ContactSection = () => {
     const t = useTranslations('contact');
+    const locale = useLocale();
 
     return (
         <section className="flex min-h-[50vh] flex-col items-center justify-center bg-zinc-900 px-6 py-20 dark:bg-zinc-950">
@@ -29,6 +31,12 @@ const ContactSection = () => {
                     >
                         GitHub
                     </a>
+                    <Link
+                        href={`/${locale}/echoes`}
+                        className="rounded-lg border border-zinc-50 px-6 py-3 text-zinc-50 transition-colors hover:bg-zinc-800"
+                    >
+                        {t('echoes')}
+                    </Link>
                 </div>
                 <p className="mt-12 text-sm text-zinc-500">
                     {t('copyright')}

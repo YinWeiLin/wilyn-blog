@@ -18,6 +18,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
     title: "WiLyn's ciberHouse",
     description: "The Resting Place of Souls",
+    icons: {
+        icon: "/favicon.ico",
+    },
 };
 
 export default async function LocaleLayout({

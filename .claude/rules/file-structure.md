@@ -15,6 +15,16 @@
 4. **状态管理**放在 `app/store/` 下，文件命名为 `[name]Store.ts`
    - 例：`app/store/themeStore.ts`
 
+5. **工具函数**放在 `app/lib/` 下
+   - 例：`app/lib/sanitize.ts`
+
+6. **API 路由**放在 `app/api/` 下，遵循 Next.js Route Handler 约定
+   - 例：`app/api/echoes/route.ts`
+   - API 路由常量统一在 `config/apiRoutes.ts` 中注册
+
+7. **数据文件**（JSON 等）放在项目根目录 `data/` 下
+   - 例：`data/echoes.json`
+
 ## i18n 文案规范
 
 1. 组件内**禁止硬编码**任何用户可见文字

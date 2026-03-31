@@ -35,7 +35,19 @@
         "title": "Contact Me",
         "subtitle": "Feel free to reach out if you have any questions or suggestions",
         "email": "Send Email",
+        "echoes": "Guestbook",
         "copyright": "© 2026 WiLyn Cyber Palace. All rights reserved."
+    },
+    "echoes": {
+        "back": "Back to Palace",
+        "title": "Echoes",
+        "subtitle": "Leave a trace of your presence here",
+        "sortAsc": "Time ↑",
+        "sortDesc": "Time ↓",
+        "namePlaceholder": "Your nickname",
+        "contentPlaceholder": "Leave your message...",
+        "submit": "Submit",
+        "submitting": "Submitting..."
     },
     "theme": {
         "toggle": "Toggle theme"

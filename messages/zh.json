@@ -35,7 +35,19 @@
         "title": "联系我",
         "subtitle": "如果你有任何问题或建议，欢迎与我交流",
         "email": "发送邮件",
+        "echoes": "访客留言板",
         "copyright": "© 2026 WiLyn 赛博宫殿. All rights reserved."
+    },
+    "echoes": {
+        "back": "返回宫殿",
+        "title": "Echoes · 回声",
+        "subtitle": "留下你在这里存在过的痕迹",
+        "sortAsc": "时间 ↑",
+        "sortDesc": "时间 ↓",
+        "namePlaceholder": "你的昵称",
+        "contentPlaceholder": "写下你的留言...",
+        "submit": "提交留言",
+        "submitting": "提交中..."
     },
     "theme": {
         "toggle": "切换主题"

@@ -57,8 +57,10 @@ app/components/
       index.tsx
       LangToggle.tsx
       ThemeToggle.tsx
+    ContentInput/                # 通用内容输入组件
     providers/
       ThemeUpdater.tsx           # 同步 Zustand 主题状态到 <html> class
+  echoes/                        # Echoes 访客留言板组件
   homePage/                      # 首页专属组件
     index.tsx                    # 首页组合入口
     components/
@@ -67,6 +69,14 @@ app/components/
       AboutSection.tsx
       ContactSection.tsx
       ThreeBackground.tsx
+```
+
+### 其他目录
+```
+app/lib/                         # 工具函数（如 sanitize）
+app/api/echoes/route.ts          # Echoes 留言板 API（POST）
+config/apiRoutes.ts              # API 路由常量注册表
+data/echoes.json                 # Echoes 留言数据（JSON 文件存储）
 ```
 
 ### 国际化（i18n）
@@ -79,7 +89,7 @@ app/components/
 ### TypeScript 配置
 - 目标版本：ES2017
 - 启用严格模式
-- 路径别名：`@/*` 映射到 `./*`（根目录）
+- 路径别名：`@/*` 映射到 `./app/*`（注意是 app 目录，不是项目根目录）。`app/` 外的文件（如 `config/`）须用相对路径导入
 - JSX 运行时：`react-jsx`
 - 模块解析：`bundler`（针对 Next.js 优化）
 
