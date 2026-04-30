@@ -2,24 +2,25 @@
 
 import { useTranslations } from 'next-intl';
 import ThreeBackground from "./ThreeBackground";
-import { useTheme } from "@/store/themeStore";
 
 const HeroSection = () => {
-    const isDark = useTheme((state) => state.isDark);
     const t = useTranslations('hero');
 
     return (
         <section className="relative flex min-h-screen flex-col items-center justify-center gap-6 px-6 overflow-hidden md:items-end md:justify-end md:pb-24 md:pr-24">
-            <ThreeBackground isDark={isDark} />
-            <h1 className="relative z-10 text-center text-5xl font-bold text-zinc-900 dark:text-zinc-50 sm:text-6xl md:text-right md:text-7xl">
+            <ThreeBackground />
+            <h1 className="relative z-10 text-center text-5xl font-bold text-zinc-50 sm:text-6xl md:text-right md:text-7xl">
                 {t('title')}
             </h1>
-            <p className="relative z-10 text-center text-xl text-zinc-600 dark:text-zinc-400 sm:text-2xl md:text-right">
+            <p className="relative z-10 text-center text-xl text-zinc-300 sm:text-2xl md:text-right">
                 {t('subtitle')}
             </p>
-            <button className="relative z-10 mt-4 rounded-lg bg-zinc-900 px-8 py-3 text-white transition-colors hover:bg-zinc-700 dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200">
-                {t('cta')}
-            </button>
+            <div className="relative z-10 mt-4 flex items-center gap-3">
+                <span className="text-sm text-zinc-300">{t('cta')}</span>
+                <div className="h-10 w-6 rounded-full border-2 border-zinc-300 p-1">
+                    <div className="h-2 w-1.5 mx-auto rounded-full bg-zinc-300 animate-scroll-dot" />
+                </div>
+            </div>
         </section>
     );
 };

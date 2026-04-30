@@ -77,6 +77,8 @@ app/lib/                         # 工具函数（如 sanitize）
 app/api/echoes/route.ts          # Echoes 留言板 API（POST）
 config/apiRoutes.ts              # API 路由常量注册表
 data/echoes.json                 # Echoes 留言数据（JSON 文件存储）
+public/imgs/                     # 静态图片资源（如星空背景图）
+public/three/                    # Three.js 3D 模型资源（如 .glb 文件）
 ```
 
 ### 国际化（i18n）
@@ -120,3 +122,4 @@ data/echoes.json                 # Echoes 留言数据（JSON 文件存储）
 - ESLint 9 with Next.js config
 - next-intl 4.x（i18n）
 - Zustand（主题状态管理）
+- Three.js（3D 背景渲染，含 GLTFLoader + DRACOLoader）
