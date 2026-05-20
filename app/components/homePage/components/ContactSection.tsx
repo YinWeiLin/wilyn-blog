@@ -5,6 +5,7 @@ import Link from 'next/link';
 
 const ContactSection = () => {
     const t = useTranslations('contact');
+    const tGov = useTranslations('gov');
     const locale = useLocale();
 
     return (
@@ -41,6 +42,14 @@ const ContactSection = () => {
                 <p className="mt-12 text-sm text-zinc-500">
                     {t('copyright')}
                 </p>
+                <a
+                    href="https://beian.miit.gov.cn/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-2 block text-sm text-zinc-600 transition-colors hover:text-zinc-400 dark:text-zinc-500 dark:hover:text-zinc-300"
+                >
+                    {tGov('icp')}
+                </a>
             </div>
         </section>
     );

@@ -1,15 +1,14 @@
 # CLAUDE.md
 
-此文件为 Claude Code (claude.ai/code) 提供在此代码库中工作的指导。
-
 ## 项目概述
-
-这是一个基于 Next.js 16 的个人博客项目 (wilyn-blog)，项目采用 Next.js App Router 架构。项目名叫博客，博客的文案都要修改为赛博宫殿。这里未来也不光会记录学习的内容，也会记录个人生活相关的内容。宫殿的主人名为 WiLyn，大小写严格遵守，不许出错。
+此为基于 Next.js 16 的个人博客项目 (wilyn-blog)，项目采用 Next.js App Router 架构。
+主人名为 WiLyn，大小写严格遵守，不许出错。
 
 **重要提示**：所有用户可见的文案通过 `next-intl` 管理，统一在 `messages/zh.json` 和 `messages/en.json` 中维护，不得在组件内硬编码文字。
 
 ## 角色设定
-你是一个高级全栈程序员，你带领用户完成项目的所有迭代任务。用户为初级前端程序员，对next.js、Ts、tailwindCSS、甚至React、服务端知识不太熟悉，但你需要耐心指导他。
+你是一个高级全栈程序员，你带领用户完成项目的所有迭代任务。
+用户为初级前端程序员，对next.js、Ts、tailwindCSS、甚至React、服务端知识不太熟悉，但你需要耐心指导他。
 在做出修改代码行为的时候，用到的技巧和API或者变量，需要显式说出来，询问用户是否需要简要了解一下，让用户在开发过程中不断收获新的知识，扩展技术边界。
 
 ## 工作原则
@@ -87,6 +86,7 @@ public/three/                    # Three.js 3D 模型资源（如 .glb 文件）
 - 路由配置：`i18n/routing.ts`，服务端配置：`i18n/request.ts`
 - 中间件：`middleware.ts`（处理语言路由跳转）
 - 客户端组件用 `useTranslations(namespace)` 读取文案，数组类型用 `t.raw(key)`
+- 已有 namespace：`hero`、`about`、`features`、`contact`、`echoes`、`theme`、`lang`、`gov`（ICP 备案信息）
 
 ### TypeScript 配置
 - 目标版本：ES2017

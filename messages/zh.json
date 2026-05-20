@@ -49,6 +49,9 @@
         "submit": "提交留言",
         "submitting": "提交中..."
     },
+    "gov": {
+        "icp": "京ICP备2026025574号"
+    },
     "theme": {
         "toggle": "切换主题"
     },

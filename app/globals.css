@@ -125,11 +125,22 @@
     }
 }
 
+html {
+    scrollbar-width: none;
+}
+
+html::-webkit-scrollbar {
+    display: none;
+}
+
 @keyframes scroll-dot {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0);
         opacity: 1;
     }
+
     50% {
         transform: translateY(12px);
         opacity: 0.3;
