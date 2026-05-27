@@ -1,12 +1,10 @@
 "use client";
 
-import { useTranslations, useLocale } from 'next-intl';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 const ContactSection = () => {
     const t = useTranslations('contact');
     const tGov = useTranslations('gov');
-    const locale = useLocale();
 
     return (
         <section className="flex min-h-[50vh] flex-col items-center justify-center bg-zinc-900 px-6 py-20 dark:bg-zinc-950">
@@ -18,12 +16,12 @@ const ContactSection = () => {
                     {t('subtitle')}
                 </p>
                 <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
-                    <a
+                    {/* <a
                         href="mailto:contact@example.com"
                         className="rounded-lg bg-zinc-50 px-6 py-3 text-zinc-900 transition-colors hover:bg-zinc-200"
                     >
                         {t('email')}
-                    </a>
+                    </a> */}
                     <a
                         href="https://github.com"
                         target="_blank"
@@ -32,12 +30,12 @@ const ContactSection = () => {
                     >
                         GitHub
                     </a>
-                    <Link
+                    {/* <Link
                         href={`/${locale}/echoes`}
                         className="rounded-lg border border-zinc-50 px-6 py-3 text-zinc-50 transition-colors hover:bg-zinc-800"
                     >
                         {t('echoes')}
-                    </Link>
+                    </Link> */}
                 </div>
                 <p className="mt-12 text-sm text-zinc-500">
                     {t('copyright')}
