@@ -6,10 +6,6 @@ import Link from 'next/link';
 
 const FeaturesSection = () => {
     const t = useTranslations('features');
-    const sections = t.raw('sections') as {
-        title: string;
-        items: { title: string; description: string }[];
-    }[];
 
     return (
         <section
