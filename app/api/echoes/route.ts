@@ -13,6 +13,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({ error: 'name and content are required' }, { status: 400 });
     }
 
+
     if (String(name).length > 10 || String(content).length > 50) {
         return NextResponse.json({}, { status: 200 });
     }
