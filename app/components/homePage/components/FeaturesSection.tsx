@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 import Link from 'next/link';
 
 const FeaturesSection = () => {
@@ -38,23 +39,14 @@ const FeaturesSection = () => {
 
                 {/* Right - Preview Card */}
                 <div className="lg:w-3/5 lg:translate-x-12">
-                    <div className="rounded-2xl p-8 shadow-2xl backdrop-blur-md border bg-white/60 border-white/60 dark:bg-slate-900/70 dark:border-slate-700/50">
-                        {sections.map((section, si) => (
-                            <div key={si} className={si < sections.length - 1 ? 'mb-8' : ''}>
-                                <h3 className="mb-4 text-sm font-semibold text-zinc-900 dark:text-white">
-                                    {section.title}
-                                </h3>
-                                {section.items.map((item, ii) => (
-                                    <div
-                                        key={ii}
-                                        className={`py-3 ${ii < section.items.length - 1 ? 'border-b border-zinc-100 dark:border-zinc-700' : ''}`}
-                                    >
-                                        <p className="text-sm font-medium text-zinc-800 dark:text-zinc-100">{item.title}</p>
-                                        <p className="mt-1 text-xs leading-relaxed text-zinc-600 dark:text-zinc-300">{item.description}</p>
-                                    </div>
-                                ))}
-                            </div>
-                        ))}
+                    <div className="overflow-hidden rounded-2xl shadow-2xl">
+                        <Image
+                            src="/imgs/mbot_session.jpg"
+                            alt="mbot session preview"
+                            width={800}
+                            height={600}
+                            className="w-full object-cover"
+                        />
                     </div>
                 </div>
 

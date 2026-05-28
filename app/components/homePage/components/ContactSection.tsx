@@ -23,7 +23,7 @@ const ContactSection = () => {
                         {t('email')}
                     </a> */}
                     <a
-                        href="https://github.com"
+                        href="https://github.com/YinWeiLin"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="rounded-lg border border-zinc-50 px-6 py-3 text-zinc-50 transition-colors hover:bg-zinc-800"

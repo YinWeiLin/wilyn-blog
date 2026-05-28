@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 import { mbotApi } from '@/lib/mbotApi';
 import ReactMarkdown from 'react-markdown';
+import Image from 'next/image';
 
 type Message = {
     role: 'user' | 'assistant';
@@ -79,6 +80,13 @@ const MbotPage = () => {
                 {/* Welcome / Messages */}
                 {messages.length === 0 ? (
                     <div className="flex flex-1 flex-col items-center justify-center gap-8 px-6 pb-40">
+                        <Image
+                            src="/imgs/mbot_avatar_1.png"
+                            alt="assistant"
+                            width={200}
+                            height={200}
+                            className="rounded-full object-cover shadow-md"
+                        />
                         <h1 className="text-4xl font-bold text-zinc-900 dark:text-zinc-50">
                             {t('greeting')}
                         </h1>
@@ -104,9 +112,16 @@ const MbotPage = () => {
                                             {msg.content}
                                         </div>
                                     ) : (
-                                        <div className="max-w-[80%] text-sm leading-7 text-zinc-800 dark:text-zinc-200 prose prose-sm dark:prose-invert">
+                                        <div className="flex items-start gap-3">
+                                            <Image
+                                                src="/imgs/mbot_avatar_1.png"
+                                                alt="assistant"
+                                                width={36}
+                                                height={36}
+                                                className="mt-1 flex-shrink-0 rounded-full object-cover"
+                                            />
                                             {msg.loading ? (
-                                                <span className="flex items-center gap-1">
+                                                <span className="mt-2 flex items-center gap-1">
                                                     {[0, 1, 2].map(i => (
                                                         <span
                                                             key={i}
@@ -115,7 +130,11 @@ const MbotPage = () => {
                                                         />
                                                     ))}
                                                 </span>
-                                            ) : <ReactMarkdown>{msg.content}</ReactMarkdown>}
+                                            ) : (
+                                                <div className="max-w-[80%] text-sm leading-7 text-zinc-800 dark:text-zinc-200 prose prose-sm dark:prose-invert">
+                                                    <ReactMarkdown>{msg.content}</ReactMarkdown>
+                                                </div>
+                                            )}
                                         </div>
                                     )}
                                 </div>

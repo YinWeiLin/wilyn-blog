@@ -10,7 +10,7 @@ const IndexPage = () => {
             <ControlBar />
             <HeroSection />
             <FeaturesSection />
-            <AboutSection />
+            {/* <AboutSection /> */}
             <ContactSection />
         </div>
     );

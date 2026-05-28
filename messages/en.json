@@ -1,7 +1,7 @@
 {
     "hero": {
         "title": "Live the Journey.",
-        "subtitle": "WiLyn's Homepage",
+        "subtitle": "Seeking answers in the boundless universe",
         "cta": "Start Exploring"
     },
     "about": {
@@ -19,33 +19,51 @@
             {
                 "title": "I. Tech Articles",
                 "items": [
-                    { "title": "1.1 Frontend Dev", "description": "Deep dives into React, Next.js, TypeScript and modern frontend practices" },
-                    { "title": "1.2 Engineering", "description": "Build tools, code standards, and performance optimization best practices" },
-                    { "title": "1.3 Open Source", "description": "Experiences contributing to and maintaining open source projects" }
+                    {
+                        "title": "1.1 Frontend Dev",
+                        "description": "Deep dives into React, Next.js, TypeScript and modern frontend practices"
+                    },
+                    {
+                        "title": "1.2 Engineering",
+                        "description": "Build tools, code standards, and performance optimization best practices"
+                    },
+                    {
+                        "title": "1.3 Open Source",
+                        "description": "Experiences contributing to and maintaining open source projects"
+                    }
                 ]
             },
             {
                 "title": "II. Dev Logs",
                 "items": [
-                    { "title": "2.1 Project Reviews", "description": "Design decisions, tech choices, and lessons learned from each project" },
-                    { "title": "2.2 Study Notes", "description": "Key takeaways and insights from the learning journey" },
-                    { "title": "2.3 Life Essays", "description": "Thoughts beyond code, recording the path of growth" }
+                    {
+                        "title": "2.1 Project Reviews",
+                        "description": "Design decisions, tech choices, and lessons learned from each project"
+                    },
+                    {
+                        "title": "2.2 Study Notes",
+                        "description": "Key takeaways and insights from the learning journey"
+                    },
+                    {
+                        "title": "2.3 Life Essays",
+                        "description": "Thoughts beyond code, recording the path of growth"
+                    }
                 ]
             }
         ]
     },
     "mbot": {
         "newChat": "New Chat",
-        "greeting": "Hi, I'm MBot",
+        "greeting": "Hi, I'm your Civil Service Exam consultant. How can I help you?",
         "send": "Send",
         "inputPlaceholder": "Send a message...",
         "suggestions": [
-            "How to build a blog with Next.js?",
-            "How do TypeScript generics work?",
-            "Best React state management libraries?",
-            "Tailwind CSS vs plain CSS?",
-            "What is a multi-agent architecture?",
-            "How to optimize frontend page load speed?"
+            "What's the difference between national and provincial exams?",
+            "How to prepare for aptitude and essay tests?",
+            "What are the eligibility requirements?",
+            "How to prepare for the interview after written exam?",
+            "Any differences for fresh graduates vs. experienced applicants?",
+            "How to choose the right exam prep course?"
         ]
     },
     "contact": {
@@ -53,7 +71,7 @@
         "subtitle": "Feel free to reach out if you have any questions or suggestions",
         "email": "Send Email",
         "echoes": "Guestbook",
-        "copyright": "© 2026 WiLyn Cyber Palace. All rights reserved."
+        "copyright": "© 2026 WiLyn. All rights reserved."
     },
     "echoes": {
         "back": "Back to Palace",
