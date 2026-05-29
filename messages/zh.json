@@ -53,7 +53,7 @@
         ]
     },
     "mbot": {
-        "newChat": "新对话",
+        "newChat": "刷新对话",
         "greeting": "你好，我是公考咨询师，有什么可以帮助您？",
         "send": "发送",
         "inputPlaceholder": "发消息...",
