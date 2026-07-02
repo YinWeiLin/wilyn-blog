@@ -7,7 +7,8 @@ import Link from 'next/link';
 import ControlBar from '@/components/common/ControlBar';
 import ContentInput from '@/components/common/ContentInput';
 import MessageCard from './components/MessageCard';
-import { API_ROUTES } from '../../../config/apiRoutes';
+import { API_ROUTES } from '@config/apiRoutes';
+import { ROUTES } from '@config/routes';
 
 export interface Message {
     id: string;
@@ -48,7 +49,7 @@ const EchoesPage = ({ messages }: EchoesPageProps) => {
             <ControlBar />
             <div className="shrink-0 border-b border-zinc-200 px-6 pb-4 pt-6 dark:border-zinc-800">
                 <Link
-                    href={`/${locale}`}
+                    href={`/${locale}${ROUTES.home}`}
                     className="mb-4 inline-block text-sm text-zinc-500 transition-colors hover:text-zinc-800 dark:text-zinc-400 dark:hover:text-zinc-200"
                 >
                     ← {t('back')}

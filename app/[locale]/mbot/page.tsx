@@ -3,6 +3,7 @@
 import { useTranslations } from 'next-intl';
 import { useEffect, useRef, useState } from 'react';
 import { mbotApi } from '@/lib/mbotApi';
+import { IMAGES } from '@config/images';
 import ReactMarkdown from 'react-markdown';
 import Image from 'next/image';
 
@@ -62,7 +63,7 @@ const MbotPage = () => {
         <div className="flex h-screen bg-white dark:bg-zinc-900">
 
             {/* Sidebar */}
-            <aside className="flex w-60 flex-shrink-0 flex-col border-r border-zinc-200 px-3 py-4 dark:border-zinc-700">
+            <aside className="hidden lg:flex w-60 flex-shrink-0 flex-col border-r border-zinc-200 px-3 py-4 dark:border-zinc-700">
                 <button
                     onClick={() => { setMessages([]); setSsid(null); }}
                     className="flex cursor-pointer items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-zinc-800 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-800"
@@ -77,17 +78,30 @@ const MbotPage = () => {
             {/* Main */}
             <div className="relative flex flex-1 flex-col overflow-hidden">
 
+                {/* Mobile header */}
+                <div className="flex items-center justify-end border-b border-zinc-200 px-4 py-2 lg:hidden dark:border-zinc-700">
+                    <button
+                        onClick={() => { setMessages([]); setSsid(null); }}
+                        className="flex cursor-pointer items-center gap-2 rounded-lg px-3 py-1.5 text-sm font-medium text-zinc-800 hover:bg-zinc-100 dark:text-zinc-200 dark:hover:bg-zinc-800"
+                    >
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M12 5v14M5 12h14" strokeLinecap="round" />
+                        </svg>
+                        {t('newChat')}
+                    </button>
+                </div>
+
                 {/* Welcome / Messages */}
                 {messages.length === 0 ? (
-                    <div className="flex flex-1 flex-col items-center justify-center gap-8 px-6 pb-40">
+                    <div className="flex flex-1 flex-col items-center justify-center gap-6 px-4 pb-40 sm:gap-8 sm:px-6">
                         <Image
-                            src="/imgs/mbot_avatar_1.png"
+                            src={IMAGES.mbotAvatar}
                             alt="assistant"
                             width={200}
                             height={200}
-                            className="rounded-full object-cover shadow-md"
+                            className="rounded-full object-cover shadow-md size-[150px] sm:size-[200px]"
                         />
-                        <h1 className="text-4xl font-bold text-zinc-900 dark:text-zinc-50">
+                        <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50 sm:text-4xl">
                             {t('greeting')}
                         </h1>
                         <div className="flex max-w-3xl flex-wrap justify-center gap-3">
@@ -103,18 +117,18 @@ const MbotPage = () => {
                         </div>
                     </div>
                 ) : (
-                    <div className="flex-1 overflow-y-auto px-6 py-8 pb-40">
+                    <div className="flex-1 overflow-y-auto px-3 py-6 pb-40 sm:px-6 sm:py-8">
                         <div className="mx-auto flex max-w-3xl flex-col gap-6">
                             {messages.map((msg, i) => (
                                 <div key={i} className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                                     {msg.role === 'user' ? (
-                                        <div className="max-w-[70%] rounded-2xl bg-zinc-100 px-4 py-3 text-sm text-zinc-800 dark:bg-zinc-700 dark:text-zinc-100">
+                                        <div className="max-w-[85%] rounded-2xl bg-zinc-100 px-4 py-3 text-sm text-zinc-800 sm:max-w-[70%] dark:bg-zinc-700 dark:text-zinc-100">
                                             {msg.content}
                                         </div>
                                     ) : (
                                         <div className="flex items-start gap-3">
                                             <Image
-                                                src="/imgs/mbot_avatar_1.png"
+                                                src={IMAGES.mbotAvatar}
                                                 alt="assistant"
                                                 width={36}
                                                 height={36}
@@ -131,7 +145,7 @@ const MbotPage = () => {
                                                     ))}
                                                 </span>
                                             ) : (
-                                                <div className="max-w-[80%] text-sm leading-7 text-zinc-800 dark:text-zinc-200 prose prose-sm dark:prose-invert">
+                                                <div className="max-w-[90%] text-sm leading-7 text-zinc-800 sm:max-w-[80%] dark:text-zinc-200 prose prose-sm dark:prose-invert">
                                                     <ReactMarkdown>{msg.content}</ReactMarkdown>
                                                 </div>
                                             )}
@@ -145,7 +159,7 @@ const MbotPage = () => {
                 )}
 
                 {/* Input */}
-                <div className="absolute bottom-0 left-0 right-0 p-6">
+                <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6">
                     <div className="mx-auto max-w-3xl rounded-2xl border border-zinc-200 bg-white px-4 py-3 shadow-lg dark:border-zinc-700 dark:bg-zinc-800">
                         <textarea
                             rows={1}

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import type * as THREE from "three";
+import { IMAGES } from '@config/images';
 
 // ===================== 常量与配置 =====================
 
@@ -248,7 +249,7 @@ const setupScene = async (THREE: typeof import("three")) => {
     const { TextureLoader } = await import("three");
     const scene = new THREE.Scene();
 
-    const bgTexture = await new TextureLoader().loadAsync("/imgs/2k_stars_milky_way.png");
+    const bgTexture = await new TextureLoader().loadAsync(IMAGES.starBackground);
     scene.background = bgTexture;
 
     scene.add(new THREE.AmbientLight(0xffffff, 1));

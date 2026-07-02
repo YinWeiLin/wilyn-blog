@@ -3,6 +3,8 @@
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
+import { IMAGES } from '@config/images';
+import { ROUTES } from '@config/routes';
 
 const FeaturesSection = () => {
     const t = useTranslations('features');
@@ -12,7 +14,7 @@ const FeaturesSection = () => {
             className="relative flex min-h-screen items-center px-6 py-20"
         >
             <div className="absolute inset-0 bg-gradient-to-br from-[#f0f4ff] via-[#fdf6ff] to-[#fff7f0] dark:from-[#1e1b4b] dark:via-[#1e1b4b] dark:to-[#1e3a5f]" />
-            <div className="absolute inset-0 bg-[url('/imgs/feature_page_background.png')] bg-center bg-no-repeat" style={{ backgroundSize: '50%' }} />
+            <div className="absolute inset-0 bg-center bg-no-repeat" style={{ backgroundImage: `url(${IMAGES.featureBackground})`, backgroundSize: '50%' }} />
             <div className="relative mx-auto flex w-full max-w-6xl flex-col gap-16 lg:flex-row lg:items-center">
 
                 {/* Left */}
@@ -28,7 +30,7 @@ const FeaturesSection = () => {
                     <p className="text-lg leading-relaxed text-zinc-500 dark:text-zinc-400">
                         {t('description')}
                     </p>
-                    <Link href="/mbot" className="w-fit cursor-pointer rounded-full border border-zinc-900 px-7 py-3 text-zinc-900 transition-colors hover:bg-zinc-900 hover:text-white dark:border-zinc-200 dark:text-zinc-200 dark:hover:bg-zinc-200 dark:hover:text-zinc-900">
+                    <Link href={ROUTES.mbot} className="w-fit cursor-pointer rounded-full border border-zinc-900 px-7 py-3 text-zinc-900 transition-colors hover:bg-zinc-900 hover:text-white dark:border-zinc-200 dark:text-zinc-200 dark:hover:bg-zinc-200 dark:hover:text-zinc-900">
                         {t('cta')} →
                     </Link>
                 </div>
@@ -37,7 +39,7 @@ const FeaturesSection = () => {
                 <div className="lg:w-3/5 lg:translate-x-12">
                     <div className="overflow-hidden rounded-2xl shadow-2xl">
                         <Image
-                            src="/imgs/mbot_session.jpg"
+                            src={IMAGES.mbotSession}
                             alt="mbot session preview"
                             width={800}
                             height={600}

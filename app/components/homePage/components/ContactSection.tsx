@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from 'next-intl';
+import { SITE } from '@config/site';
 
 const ContactSection = () => {
     const t = useTranslations('contact');
@@ -16,14 +17,14 @@ const ContactSection = () => {
                     {t('subtitle')}
                 </p>
                 <div className="flex flex-col gap-4 sm:flex-row sm:justify-center">
-                    {/* <a
-                        href="mailto:contact@example.com"
+                    <a
+                        href={SITE.email}
                         className="rounded-lg bg-zinc-50 px-6 py-3 text-zinc-900 transition-colors hover:bg-zinc-200"
                     >
                         {t('email')}
-                    </a> */}
+                    </a>
                     <a
-                        href="https://github.com/YinWeiLin"
+                        href={SITE.github}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="rounded-lg border border-zinc-50 px-6 py-3 text-zinc-50 transition-colors hover:bg-zinc-800"
@@ -41,7 +42,7 @@ const ContactSection = () => {
                     {t('copyright')}
                 </p>
                 <a
-                    href="https://beian.miit.gov.cn/"
+                    href={SITE.icp}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="mt-2 block text-sm text-zinc-600 transition-colors hover:text-zinc-400 dark:text-zinc-500 dark:hover:text-zinc-300"
